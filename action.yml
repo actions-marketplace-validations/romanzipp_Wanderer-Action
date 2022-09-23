@@ -1,0 +1,29 @@
+name: "Wanderer"
+author: "Roman Zipp"
+branding:
+  icon: "download-cloud"
+  color: "red"
+description: "Deploy builds to your Nomad Cluster via Wanderer"
+
+inputs:
+  endpoint:
+    description: "The base url to your Wanderer instance"
+    required: true
+  token:
+    description: "The specified Wanderer authentication API token"
+    required: true
+  job:
+    description: "The Nomad job ID"
+    required: true
+  selector:
+    description: "The version selector as specified in Wanderer UI"
+    required: true
+  version:
+    description: "The new version to be deployed"
+    required: true
+  cf_access_client_id:
+    description: "Cloudflare Access Client Id"
+    required: false
+  cf_access_client_secret:
+    description: "Cloudflare Access Client Secret"
+    required: false
