@@ -1,5 +1,3 @@
-#!/bin/bash
-
 generate_post_data() {
   cat <<EOF
   {
