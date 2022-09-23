@@ -34,7 +34,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: deploy.sh
+    - run: $GITHUB_ACTION_PATH/entrypoint.sh
       shell: bash
       env:
         ENDPOINT: ${{ inputs.endpoint }}
