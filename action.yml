@@ -12,6 +12,9 @@ inputs:
   token:
     description: "The specified Wanderer authentication API token"
     required: true
+  server:
+    description: "The server ID from Wanderer"
+    required: true
   job:
     description: "The Nomad job ID"
     required: true
@@ -27,3 +30,18 @@ inputs:
   cf_access_client_secret:
     description: "Cloudflare Access Client Secret"
     required: false
+
+runs:
+  using: "composite"
+  steps:
+    - run: deploy.sh
+      shell: bash
+      env:
+        ENDPOINT: ${{ inputs.endpoint }}
+        TOKEN: ${{ inputs.token }}
+        SERVER: ${{ inputs.server }}
+        JOB: ${{ inputs.job }}
+        SELECTOR: ${{ inputs.selector }}
+        VERSION: ${{ inputs.version }}
+        CF_ACCESS_CLIENT_ID: ${{ inputs.cf_access_client_id }}
+        CF_ACCESS_CLIENT_SECRET: ${{ inputs.cf_access_client_secret }}
