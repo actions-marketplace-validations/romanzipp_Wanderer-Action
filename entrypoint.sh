@@ -1,3 +1,6 @@
+#!/bin/sh
+set -e
+
 generate_post_data() {
   cat <<EOF
   {
