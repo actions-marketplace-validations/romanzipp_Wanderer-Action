@@ -38,6 +38,7 @@ try {
             core.setOutput('status', 'ok');
         })
         .catch((err) => {
+            core.error(err);
             core.setFailed(err.message);
         });
 } catch (error) {
