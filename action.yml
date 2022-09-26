@@ -34,6 +34,8 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - run: chmod +x $GITHUB_ACTION_PATH/entrypoint.sh
+      shell: bash
     - run: $GITHUB_ACTION_PATH/entrypoint.sh
       shell: bash
       env:
