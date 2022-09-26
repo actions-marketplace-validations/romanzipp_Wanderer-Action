@@ -31,8 +31,8 @@ jobs:
 | job                     | **yes**      | The Nomad job ID                                 | example-app                  |
 | selector                | **yes**      | The version selector as specified in Wanderer UI | `WEB_VERSION`                |
 | version                 | **yes**      | The new version to be deployed                   | `1.0.0`                      |
-| cf_access_client_id     | no       | Cloudflare Access Client Id                      |                              |
-| cf_access_client_secret | no       | Cloudflare Access Client Secret                  |                              |
+| cf-access-client-id     | no       | Cloudflare Access Client Id                      |                              |
+| cf-access-client-secret | no       | Cloudflare Access Client Secret                  |                              |
 
 ## License
 

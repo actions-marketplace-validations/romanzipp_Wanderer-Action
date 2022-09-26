@@ -10,8 +10,8 @@ try {
         core.getInput('job'),
         core.getInput('selector'),
         core.getInput('version'),
-        core.getInput('cf_access_client_id'),
-        core.getInput('cf_access_client_secret'),
+        core.getInput('cf-access-client-id'),
+        core.getInput('cf-access-client-secret'),
     ];
 
     const headers = {

@@ -24,10 +24,10 @@ inputs:
   version:
     description: "The new version to be deployed"
     required: true
-  cf_access_client_id:
+  cf-access-client-id:
     description: "Cloudflare Access Client Id"
     required: false
-  cf_access_client_secret:
+  cf-access-client-secret:
     description: "Cloudflare Access Client Secret"
     required: false
 
