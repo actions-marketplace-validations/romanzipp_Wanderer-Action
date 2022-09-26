@@ -1,46 +1,61 @@
-const core = require('@actions/core');
-const github = require('@actions/github');
+// Inspired by https://github.com/Ilshidur/action-discord
+// Released under the MIT License, Copyright (c) 2018 Nicolas Coutin
+
 const axios = require('axios');
+const yargs = require('yargs/yargs');
+const { hideBin } = require('yargs/helpers');
 
-try {
-    const [endpoint, token, server, job, selector, version, cfAccessClientId, cfAccessClientSecret] = [
-        core.getInput('endpoint'),
-        core.getInput('token'),
-        core.getInput('server'),
-        core.getInput('job'),
-        core.getInput('selector'),
-        core.getInput('version'),
-        core.getInput('cf-access-client-id'),
-        core.getInput('cf-access-client-secret'),
-    ];
+const { argv } = yargs(hideBin(process.argv));
 
-    const headers = {
-        Authorization: `${token}`,
-        'Content-Type': 'application/json',
-    };
+const REQUIRED_ENV_VARS = [
+    // 'GITHUB_EVENT_PATH',
+    // 'GITHUB_REPOSITORY',
+    // 'GITHUB_WORKFLOW',
+    // 'GITHUB_ACTOR',
+    // 'GITHUB_EVENT_NAME',
+    // 'GITHUB_ACTION',
+];
 
-    if (cfAccessClientId) {
-        headers['CF-Access-Client-Id'] = cfAccessClientId;
-        headers['CF-Access-Client-Secret'] = cfAccessClientSecret;
+process.env.GITHUB_ACTION = process.env.GITHUB_ACTION || '<missing GITHUB_ACTION env var>';
+
+REQUIRED_ENV_VARS.forEach((env) => {
+    if (!process.env[env] || !process.env[env].length) {
+        console.error(
+            `Env var ${env} is not defined. Maybe try to set it if you are running the script manually.`,
+        );
+        process.exit(1);
     }
+});
 
-    axios
-        .post(`${endpoint}/api/deploy`, {
-            server, job, selector, version,
-        }, { headers })
-        .then((res) => {
-            // const data = JSON.parse(res.data);
-            // const payload = JSON.stringify(github.context.payload, undefined, 2);
+const [endpoint, token, server, job, selector, version, cfAccessClientId, cfAccessClientSecret] = [...argv._];
 
-            // console.log('The event payload', payload);
-            console.log('response:', res.data);
+console.debug('args:', {
+    endpoint, token, server, job, selector, version, cfAccessClientId, cfAccessClientSecret,
+});
 
-            core.setOutput('status', 'ok');
-        })
-        .catch((err) => {
-            core.error(err);
-            core.setFailed(err.message);
-        });
-} catch (error) {
-    core.setFailed(error.message);
+const headers = {
+    Authorization: `${token}`,
+    'Content-Type': 'application/json',
+};
+
+if (cfAccessClientId) {
+    headers['CF-Access-Client-Id'] = cfAccessClientId;
+    headers['CF-Access-Client-Secret'] = cfAccessClientSecret;
 }
+
+console.debug('headers:', headers);
+
+(async () => {
+    try {
+        const response = await axios.post(`${endpoint}/api/deploy`, {
+            server, job, selector, version,
+        }, { headers });
+
+        console.log(response.data);
+
+        process.exit(0);
+    } catch (err) {
+        console.error('error in POST request:', err.message, err?.response?.data?.message);
+        process.exit(1);
+    }
+})();

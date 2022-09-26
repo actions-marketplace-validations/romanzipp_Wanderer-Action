@@ -34,12 +34,6 @@ jobs:
 | cf-access-client-id     | no       | Cloudflare Access Client Id                      |                              |
 | cf-access-client-secret | no       | Cloudflare Access Client Secret                  |                              |
 
-## Development
-
-```
-npx ncc build index.js -m --license licenses.txt
-```
-
 ## License
 
 Released under the [MIT License](LICENSE.md).
