@@ -29,11 +29,11 @@ try {
             server, job, selector, version,
         }, { headers })
         .then((res) => {
-            const data = JSON.parse(res.data);
+            // const data = JSON.parse(res.data);
             const payload = JSON.stringify(github.context.payload, undefined, 2);
 
             console.log('The event payload', payload);
-            console.log('response:', data);
+            console.log('response:', res.data);
 
             core.setOutput('status', 'ok');
         })
