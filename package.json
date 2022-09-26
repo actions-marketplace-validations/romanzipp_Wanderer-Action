@@ -1,6 +1,6 @@
 {
   "name": "wanderer-action",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "index.js",
   "repository": "git@github.com:romanzipp/Wanderer-Action.git",
   "author": "Roman Zipp <ich@ich.wtf>",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@actions/core": "^1.9.1",
     "@actions/github": "^5.1.0",
+    "@vercel/ncc": "vercel/ncc",
     "axios": "^0.27.2"
   },
   "devDependencies": {
