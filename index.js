@@ -30,9 +30,9 @@ try {
         }, { headers })
         .then((res) => {
             // const data = JSON.parse(res.data);
-            const payload = JSON.stringify(github.context.payload, undefined, 2);
+            // const payload = JSON.stringify(github.context.payload, undefined, 2);
 
-            console.log('The event payload', payload);
+            // console.log('The event payload', payload);
             console.log('response:', res.data);
 
             core.setOutput('status', 'ok');
