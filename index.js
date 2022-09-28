@@ -51,8 +51,12 @@ console.debug('headers:', headers);
             server, job, selector, version,
         }, { headers });
 
-        console.log(response.data);
+        if (typeof response.data !== 'object') {
+            console.warn(response.data);
+            throw new Error('The response does not contain JSON');
+        }
 
+        console.debug(response.data);
         process.exit(0);
     } catch (err) {
         console.error('error in POST request:', err.message, err?.response?.data?.message);
