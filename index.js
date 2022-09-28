@@ -43,13 +43,18 @@ if (cfAccessClientId) {
     headers['CF-Access-Client-Secret'] = cfAccessClientSecret;
 }
 
+const params = {
+    server, job, selector, version,
+};
+
+const serializedParams = Object.keys(params).reduce((accumulator, value) => ({ ...accumulator, [value]: params[value] ? params[value] : undefined }), {});
+
 console.debug('headers:', headers);
+console.debug('serializedParams:', serializedParams);
 
 (async () => {
     try {
-        const response = await axios.post(`${endpoint}/api/deploy`, {
-            server, job, selector, version,
-        }, { headers });
+        const response = await axios.post(`${endpoint}/api/deploy`, serializedParams, { headers });
 
         if (typeof response.data !== 'object') {
             console.warn(response.data);
