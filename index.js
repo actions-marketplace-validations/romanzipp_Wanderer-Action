@@ -8,12 +8,12 @@ const { hideBin } = require('yargs/helpers');
 const { argv } = yargs(hideBin(process.argv));
 
 const REQUIRED_ENV_VARS = [
-    // 'GITHUB_EVENT_PATH',
-    // 'GITHUB_REPOSITORY',
-    // 'GITHUB_WORKFLOW',
-    // 'GITHUB_ACTOR',
-    // 'GITHUB_EVENT_NAME',
-    // 'GITHUB_ACTION',
+    'GITHUB_EVENT_PATH',
+    'GITHUB_REPOSITORY',
+    'GITHUB_WORKFLOW',
+    'GITHUB_ACTOR',
+    'GITHUB_EVENT_NAME',
+    'GITHUB_ACTION',
 ];
 
 process.env.GITHUB_ACTION = process.env.GITHUB_ACTION || '<missing GITHUB_ACTION env var>';
